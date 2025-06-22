@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVA SERVERSIDE | Ultimate Scripting</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@400;600&display=swap');
+
+        :root {
+            --main-bg: #0a0a0a;
+            --card-bg: rgba(20, 20, 20, 0.8);
+            --accent: #9c4dff;
+            --accent-hover: #7a2ddf;
+            --text: #f0f0f0;
+            --text-secondary: #c0c0c0;
+            --neon-glow: 0 0 10px var(--accent), 0 0 20px var(--accent), 0 0 30px var(--accent);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=1000') center/cover no-repeat fixed;
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.85);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 40px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            background: var(--card-bg);
+            box-shadow: var(--neon-glow);
+            border: 1px solid var(--accent);
+            animation: pulse 6s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 15px var(--accent); }
+            50% { box-shadow: 0 0 30px var(--accent); }
+            100% { box-shadow: 0 0 15px var(--accent); }
+        }
+
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: transparent;
+            background: linear-gradient(90deg, var(--accent), #ff00ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: var(--neon-glow);
+            animation: textGlow 3s infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .tier {
+            background: rgba(30, 30, 30, 0.6);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s;
+        }
+
+        .tier::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                transparent 45%,
+                var(--accent),
+                transparent 55%
+            );
+            transform: rotate(45deg);
+            animation: shine 4s infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .tier:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--neon-glow);
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+            display: inline-block;
+            background: linear-gradient(to right, var(--accent), #ff00ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+        }
+
+        .price::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, var(--accent), transparent);
+        }
+
+        ul {
+            list-style: none;
+            margin: 25px 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        li::before {
+            content: "➤";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 1.2rem;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(5px); }
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 20px 0;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(156, 77, 255, 0.4);
+            transition: all 0.5s;
+        }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(156, 77, 255, 0.6);
+        }
+
+        .btn:hover::before {
+            transform: translateX(100%);
+        }
+
+        .terms-section {
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(156, 77, 255, 0.3);
+            position: relative;
+        }
+
+        .terms-section::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tier {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NOVA SERVERSIDE</h1>
+        <p class="subtitle">ULTIMATE ROBLOX SCRIPTING EXPERIENCE</p>
+
+        <div class="tier">
+            <h2>Basic Tier</h2>
+            <div class="price">1000 ROBUX</div>
+            <p>One-time payment</p>
+            <ul>
+                <li>Standard server-side scripts</li>
+                <li>Basic admin commands</li>
+                <li>Regular script updates</li>
+                <li>Discord support access</li>
+                <li>Standard protection</li>
+            </ul>
+            <a href="https://discord.gg/sided" class="btn">Get Started</a>
+        </div>
+
+        <div class="tier">
+            <h2>Enhanced Tier</h2>
+            <div class="price">2200 ROBUX</div>
+            <p>One-time payment</p>
+            <ul>
+                <li>All Basic features</li>
+                <li>Premium scripts</li>
+                <li>Advanced admin tools</li>
+                <li>Priority updates</li>
+                <li>VIP Discord role</li>
+                <li>Enhanced protection</li>
+                <li>Custom script requests</li>
+            </ul>
+            <a href="https://discord.gg/sided" class="btn">Upgrade Now</a>
+        </div>
+
+        <h2 style="margin-top: 50px; text-align: center;">Terms of Service</h2>
+
+        <div class="terms-section">
+            <h3>1. Mass Killing</h3>
+            <p>Intentionally killing or disrupting the entire server within minutes is strictly prohibited, as it ruins the experience for others and may lead to a blacklist.</p>
+        </div>
+
+        <div class="terms-section">
+            <h3>2. Abusive Scripts</h3>
+            <p>The use of abusive scripts—such as server destroyers or anything that significantly breaks or disrupts gameplay—is strictly forbidden and will result in disciplinary action.</p>
+        </div>
+
+        <div class="terms-section">
+            <h3>3. Kicking Users</h3>
+            <p>Unwarrantedly kicking users from the server without valid reason is prohibited and may result in penalties or a blacklist.</p>
+        </div>
+
+        <div class="terms-section">
+            <h3>4. Banning Users</h3>
+            <p>Banning users without a valid reason or authority is prohibited and may lead to disciplinary actions or a blacklist.</p>
+        </div>
+
+        <div class="terms-section">
+            <h3>5. Map Changing</h3>
+            <p>Changing the map without permission or for disruptive purposes is strictly prohibited and may result in disciplinary action or a blacklist.</p>
+        </div>
+
+        <div class="terms-section">
+            <h3>6. Highly Abusive Scripts</h3>
+            <p>The use of highly abusive scripts—such as those that completely break or destroy the game—is strictly forbidden and will result in disciplinary action.</p>
+        </div>
+
+        <a href="https://discord.gg/sided" class="btn" style="display: block; width: fit-content; margin: 50px auto 30px;">Join Our Discord</a>
+
+        <div class="footer">
+            © 2025 NOVA SERVERSIDE | All Rights Reserved
+        </div>
+    </div>
+
+    <script>
+        // Additional interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const tiers = document.querySelectorAll('.tier');
+            
+            tiers.forEach(tier => {
+                tier.addEventListener('mousemove', (e) => {
+                    const x = e.clientX - tier.getBoundingClientRect().left;
+                    const y = e.clientY - tier.getBoundingClientRect().top;
+                    
+                    tier.style.setProperty('--mouse-x', `${x}px`);
+                    tier.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
